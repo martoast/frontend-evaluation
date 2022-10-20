@@ -23,7 +23,13 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    "~/plugins/vue-responsive-dash.js"
+    {
+      src: "~/plugins/vue-responsive-dash.js"
+    },
+    {
+      src: "~/plugins/apex-charts.js"
+    },
+
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
