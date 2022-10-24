@@ -1,6 +1,7 @@
 import Vue from 'vue'
-import ApexCharts from 'apexcharts'
+import VueApexCharts from 'vue-apexcharts'
 
-export default (context, inject) => {
-    inject("apexcharts", ApexCharts)
-}
+// export default (context, inject) => {
+//     inject("apexchart", ApexChart)
+// }
+Vue.component("apexchart", VueApexCharts);
