@@ -3,7 +3,7 @@
     <b-btn @click="onAddChart">Add chart</b-btn>
     <dashboard :id="'dashExample'">
       <dash-layout ref="dashLayout" v-for="layout in dlayouts" v-bind="layout" :debug="true" :key="layout.breakpoint">
-        <dash-item v-for="item in dashItems" v-bind.sync="item" v-on:moveEnd="moveEnd" :key="item.id">
+        <dash-item v-for="(item, index) in dashItems" v-bind.sync="item" v-on:moveEnd="moveEnd(index)" :key="item.id">
           <div class="content">
             <b-btn @click="onDeleteChart(item)">Delete</b-btn>
             <custom-chart :chartOptions="item.data.chartOptions" :series="item.data.series" :type="item.data.type" :width="item.data.width"></custom-chart>
@@ -118,9 +118,9 @@ export default {
     };
   },
   methods: {
-    moveEnd() {
+    moveEnd(index) {
       this.$nextTick(() => {
-        this.$refs.dashLayout[0].placeholderY = this.maxY + this.maxH;
+        this.$refs.dashLayout[index].placeholderY = this.maxY + this.maxH;
       });
     },
     onAddChart() {
