@@ -1,25 +1,12 @@
 <template>
   <div id="app">
+    <b-btn @click="onAddChart">Add chart</b-btn>
     <dashboard :id="'dashExample'">
       <dash-layout ref="dashLayout" v-for="layout in dlayouts" v-bind="layout" :debug="true" :key="layout.breakpoint">
-        <dash-item v-bind.sync="dashitem1" v-on:moveEnd="moveEnd">
+        <dash-item v-for="item in dashItems" v-bind.sync="item" v-on:moveEnd="moveEnd" :key="item.id">
           <div class="content">
-            <pie-chart></pie-chart>
-          </div>
-        </dash-item>
-        <dash-item v-bind.sync="dashitem2" v-on:moveEnd="moveEnd">
-          <div class="content">
-            <pie-chart></pie-chart>
-          </div>
-        </dash-item>
-        <dash-item v-bind.sync="dashitem3" v-on:moveEnd="moveEnd">
-          <div class="content">
-            <bar-chart></bar-chart>
-          </div>
-        </dash-item>
-        <dash-item v-bind.sync="dashitem4" v-on:moveEnd="moveEnd">
-          <div class="content">
-            <bar-chart></bar-chart>
+            <b-btn @click="onDeleteChart(item)">Delete</b-btn>
+            <custom-chart :chartOptions="item.data.chartOptions" :series="item.data.series" :type="item.data.type" :width="item.data.width"></custom-chart>
           </div>
         </dash-item>
       </dash-layout>
@@ -30,19 +17,103 @@
 <script>
 import PieChart from '../components/PieChart.vue';
 import BarChart from '../components/BarChart.vue';
+import CustomChart from '../components/CustomChart.vue';
 export default {
   name: "App",
   components: {
     PieChart,
-    BarChart
+    BarChart,
+    CustomChart
 
   },
   data() {
     return {
-      dashitem1: { id: "1", x: 0, y: 0, width: 3, height: 2},
-      dashitem2: { id: "2", x: 0, y: 0, width: 3, height: 2},
-      dashitem3: { id: "3", x: 3, y: 0, width: 3, height: 2},
-      dashitem4: { id: "4", x: 3, y: 0, width: 3, height: 2},
+      dashItems: [
+      { id: "0", x: 0, y: 0, width: 3, height: 2, 
+        data: {
+          type: "pie",
+          width:"375",
+          series: [44, 55, 13, 43, 22],
+          chartOptions: {
+            labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: 'bottom'
+                }
+              }
+            }]
+          }
+        }
+    },
+    { id: "1", x: 0, y: 0, width: 3, height: 2, 
+        data: {
+          type: "pie",
+          series: [44, 55, 13, 43, 22],
+          width:"375",
+          chartOptions: {
+            labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: 'bottom'
+                }
+              }
+            }]
+          }
+        }
+    },
+    { id: "2", x: 3, y: 0, width: 3, height: 2, 
+        data: {
+          type: "pie",
+          width:"375",
+          series: [44, 55, 13, 43, 22],
+          chartOptions: {
+            labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: 'bottom'
+                }
+              }
+            }]
+          }
+        }
+    },
+    { id: "3", x: 3, y: 0, width: 3, height: 2, 
+        data: {
+          type: "pie",
+          width:"375",
+          series: [44, 55, 13, 43, 22],
+          chartOptions: {
+            labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: 'bottom'
+                }
+              }
+            }]
+          }
+        }
+    },
+      ],
       dlayouts: [
         {
           breakpoint: "xl",
@@ -71,20 +142,7 @@ export default {
           ]
         },
       ],
-      chartOptions: {
-        chart: {
-          id: 'vuechart-example'
-        },
-        xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
-        }
-      },
-      series: [
-        {
-          name: 'series-1',
-          data: [30, 40, 35, 50, 49, 60, 70, 91]
-        }
-      ]
+
     };
   },
   methods: {
@@ -93,6 +151,16 @@ export default {
         this.$refs.dashLayout[0].placeholderY = this.maxY + this.maxH;
       });
     },
+    onAddChart() {
+      let id = this.dashItems.length
+      let shit = { id: id.toString(), x: 0, y: 0, width: 3, height: 2}
+      this.dashItems.push(shit)
+  
+    },
+    onDeleteChart(chart) {   
+      console.log(chart)
+  
+    }
   }
 };
 </script>
