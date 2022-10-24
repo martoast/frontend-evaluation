@@ -29,26 +29,23 @@ export default {
   data() {
     return {
       dashItems: [
-      { id: "0", x: 0, y: 0, width: 3, height: 2, 
-        data: {
-          type: "pie",
-          width:"375",
-          series: [44, 55, 13, 43, 22],
-          chartOptions: {
-            labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-            responsive: [{
-              breakpoint: 480,
-              options: {
-                chart: {
-                  width: 200
-                },
-                legend: {
-                  position: 'bottom'
-                }
-              }
-            }]
+      { id: "0", x: 0, y: 0, width: 3, height: 2, data: {
+        type: 'bar',
+        chartOptions: {
+          chart: {
+            id: 'vuechart-example'
+          },
+          xaxis: {
+            categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
           }
+      },
+      series: [
+        {
+          name: 'series-1',
+          data: [30, 40, 35, 50, 49, 60, 70, 91]
         }
+      ]
+      }
     },
     { id: "1", x: 0, y: 0, width: 3, height: 2, 
         data: {
@@ -56,41 +53,27 @@ export default {
           series: [44, 55, 13, 43, 22],
           width:"375",
           chartOptions: {
-            labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-            responsive: [{
-              breakpoint: 480,
-              options: {
-                chart: {
-                  width: 200
-                },
-                legend: {
-                  position: 'bottom'
-                }
-              }
-            }]
+            labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E']
           }
         }
     },
-    { id: "2", x: 3, y: 0, width: 3, height: 2, 
-        data: {
-          type: "pie",
-          width:"375",
-          series: [44, 55, 13, 43, 22],
-          chartOptions: {
-            labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-            responsive: [{
-              breakpoint: 480,
-              options: {
-                chart: {
-                  width: 200
-                },
-                legend: {
-                  position: 'bottom'
-                }
-              }
-            }]
+    { id: "2", x: 3, y: 0, width: 3, height: 2, data: {
+        type: 'bar',
+        chartOptions: {
+          chart: {
+            id: 'bar-example'
+          },
+          xaxis: {
+            categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
           }
+      },
+      series: [
+        {
+          name: 'series-1',
+          data: [30, 40, 35, 50, 49, 60, 70, 91]
         }
+      ]
+      }
     },
     { id: "3", x: 3, y: 0, width: 3, height: 2, 
         data: {
@@ -99,17 +82,6 @@ export default {
           series: [44, 55, 13, 43, 22],
           chartOptions: {
             labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-            responsive: [{
-              breakpoint: 480,
-              options: {
-                chart: {
-                  width: 200
-                },
-                legend: {
-                  position: 'bottom'
-                }
-              }
-            }]
           }
         }
     },
@@ -153,7 +125,28 @@ export default {
     },
     onAddChart() {
       let id = this.dashItems.length
-      let shit = { id: id.toString(), x: 0, y: 0, width: 3, height: 2}
+
+      let shit =  { id: id.toString(), x: 0, y: 0, width: 3, height: 2, 
+        data: {
+          type: "pie",
+          width:"375",
+          series: [44, 55, 13, 43, 22],
+          chartOptions: {
+            labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: 'bottom'
+                }
+              }
+            }]
+          }
+        }
+    }
       this.dashItems.push(shit)
   
     },
